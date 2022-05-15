@@ -25,18 +25,23 @@ export default function App() {
         setCurrentNumber((fistNumber - lastNumber).toString())
         return
       case 'x':
-        setCurrentNumber((fistNumber + lastNumber).toString())
+        setCurrentNumber((fistNumber * lastNumber).toString())
         return
       case '/': 
-        setCurrentNumber((fistNumber - lastNumber).toString())
+        setCurrentNumber((fistNumber / lastNumber).toString())
+        return
+      case '%': 
+        setCurrentNumber((fistNumber / 100).toString())
         return
     }
   }
 
   function handleInput(buttonPressed){
     console.log(buttonPressed) // Mostra no Console a tecla pressionada
-    if(buttonPressed === '+' | buttonPressed === "-" | buttonPressed === "x" | buttonPressed === "/" ){
+    if(buttonPressed === '+' | buttonPressed === "-" | buttonPressed === "x" | buttonPressed === "/" | buttonPressed === "%" ){
       setCurrentNumber(currentNumber + " " + buttonPressed + " ")
+      setLastNumber(currentNumber + " " + buttonPressed + " ")
+      calculator()
       return
     }
     switch(buttonPressed){
@@ -52,6 +57,7 @@ export default function App() {
         calculator()
         return
       case '+/-':
+        setCurrentNumber(currentNumber * -1)
         return
     }
 
