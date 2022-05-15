@@ -12,26 +12,26 @@ export default function App() {
 
   function calculator(){
     const splitNumbers = currentNumber.split(' ')
-    const fistNumber = parseFloat(splitNumbers[0])
+    const firstNumber = parseFloat(splitNumbers[0])
     const lastNumber = parseFloat(splitNumbers[2])
     const operator = splitNumbers[1]
 
     // Faz ação referente tecla pressionada
     switch(operator){
       case '+':
-        setCurrentNumber((fistNumber + lastNumber).toString())
+        setCurrentNumber((firstNumber + lastNumber).toString())
         return
       case '-': 
-        setCurrentNumber((fistNumber - lastNumber).toString())
+        setCurrentNumber((firstNumber - lastNumber).toString())
         return
       case 'x':
-        setCurrentNumber((fistNumber * lastNumber).toString())
+        setCurrentNumber((firstNumber * lastNumber).toString())
         return
       case '/': 
-        setCurrentNumber((fistNumber / lastNumber).toString())
+        setCurrentNumber((firstNumber / lastNumber).toString())
         return
       case '%': 
-        setCurrentNumber((fistNumber / 100).toString())
+        setCurrentNumber((firstNumber / 100).toString())
         return
     }
   }
@@ -40,7 +40,11 @@ export default function App() {
     console.log(buttonPressed) // Mostra no Console a tecla pressionada
     if(buttonPressed === '+' | buttonPressed === "-" | buttonPressed === "x" | buttonPressed === "/" | buttonPressed === "%" ){
       setCurrentNumber(currentNumber + " " + buttonPressed + " ")
-      setLastNumber(currentNumber + " " + buttonPressed + " ")
+      if(lastNumber.includes(buttonPressed)) {
+        setLastNumber(currentNumber + " = ")
+      } else {
+        setLastNumber(currentNumber + " " + buttonPressed)
+      }
       calculator()
       return
     }
@@ -59,6 +63,14 @@ export default function App() {
       case '+/-':
         setCurrentNumber(currentNumber * -1)
         return
+      case '.':
+        if (currentNumber.includes(".")) {
+          setCurrentNumber(currentNumber)
+          return
+        } else {
+          setCurrentNumber(currentNumber + ".")
+          return
+        }
     }
 
     setCurrentNumber(currentNumber + buttonPressed)
